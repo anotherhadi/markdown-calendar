@@ -17,6 +17,7 @@ func Read(path string) (Calendar, error) {
 	c.md = &md
 
 	c.Name = md.Title
+	c.EventColor = c.md.GetFrontMatter("event_color", "#A594FD").(string)
 
 	// Load events
 	for _, section := range md.Sections {

@@ -22,8 +22,9 @@ type Event struct {
 }
 
 type Calendar struct {
-	Name   string
-	Path   string
-	Events []Event
-	md     *markdown.MarkdownFile
+	Name       string
+	Path       string
+	Events     []Event
+	EventColor string
+	md         *markdown.MarkdownFile
 }
