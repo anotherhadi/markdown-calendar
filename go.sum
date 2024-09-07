@@ -1,5 +1,5 @@
-github.com/anotherhadi/markdown v0.2.3 h1:VBwoMry3bo1lLET0qT6EuMflYrrZ3zN1PoJkDN1ZJ1U=
-github.com/anotherhadi/markdown v0.2.3/go.mod h1:FTVwXJAGp46Xjs1DgFx6SYu6XVHzs8GzlmQqiRVZO38=
+github.com/anotherhadi/markdown v0.2.4 h1:c6wElGkodWnEjjJGngEe2eYYkHeVhpsrorj76vGHbJ4=
+github.com/anotherhadi/markdown v0.2.4/go.mod h1:FTVwXJAGp46Xjs1DgFx6SYu6XVHzs8GzlmQqiRVZO38=
 github.com/lithammer/fuzzysearch v1.1.8 h1:/HIuJnjHuXS8bKaiTMeeDlW2/AyIWk2brx1V8LFgLN4=
 github.com/lithammer/fuzzysearch v1.1.8/go.mod h1:IdqeyBClc3FFqSzYq/MXESsS4S0FsZ5ajtkr5xPLts4=
 github.com/yuin/goldmark v1.4.13/go.mod h1:6yULJ656Px+3vBD8DxQVa3kxgyrAnzto9xy5taEt/CY=
