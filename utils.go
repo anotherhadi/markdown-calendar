@@ -35,3 +35,45 @@ func DayOfWeek(day, month, year int) int {
 	}
 	return weekday
 }
+
+func IncrementYear(day, month, year *int, inc int) {
+	*year += inc
+	if *year < 1 {
+		*year = 1
+	}
+	if *year > 9999 {
+		*year = 9999
+	}
+	if *day > DaysInMonth(*month, *year) {
+		*day = DaysInMonth(*month, *year)
+	}
+}
+
+func IncrementMonth(day, month, year *int, inc int) {
+	*month += inc
+	if *month < 1 {
+		*month = 12
+		IncrementYear(day, month, year, -1)
+	}
+	if *month > 12 {
+		*month = 1
+		IncrementYear(day, month, year, 1)
+	}
+	if *day > DaysInMonth(*month, *year) {
+		*day = DaysInMonth(*month, *year)
+	}
+}
+
+func IncrementDay(day, month, year *int, inc int) {
+	tmp := *day
+	tmp += inc
+	if tmp < 1 {
+		IncrementMonth(day, month, year, -1)
+		*day = DaysInMonth(*month, *year) + inc + *day
+	} else if tmp > DaysInMonth(*month, *year) {
+		*day = *day + inc - DaysInMonth(*month, *year)
+		IncrementMonth(day, month, year, 1)
+	} else {
+		*day = tmp
+	}
+}
