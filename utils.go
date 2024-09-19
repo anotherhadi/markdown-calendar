@@ -36,6 +36,11 @@ func DayOfWeek(day, month, year int) int {
 	return weekday
 }
 
+func Today() (day, month, year int) {
+	t := time.Now()
+	return t.Day(), int(t.Month()), t.Year()
+}
+
 func IncrementYear(day, month, year *int, inc int) {
 	*year += inc
 	if *year < 1 {
