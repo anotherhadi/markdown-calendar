@@ -150,23 +150,23 @@ func (c Calendar) GetColor(defaultColor string) string {
 	return defaultColor
 }
 
-func GetCalendarByName(calendars []Calendar, name string) (Calendar, error) {
-	for _, cal := range calendars {
+func GetCalendarByName(calendars []Calendar, name string) (*Calendar, error) {
+	for i, cal := range calendars {
 		if cal.Name == name {
-			return cal, nil
+			return &calendars[i], nil
 		}
 	}
-	return Calendar{}, errors.New("Calendar not found")
+	return nil, errors.New("Calendar not found")
 }
 
-func GetPurpleCalendars() []Calendar {
-	calendars := []Calendar{}
+func GetPurpleCalendars() []*Calendar {
+	calendars := []*Calendar{}
 	for _, p := range purple.Config.Calendar.Paths {
 		cal, err := Read(p)
 		if err != nil {
 			continue
 		}
-		calendars = append(calendars, cal)
+		calendars = append(calendars, &cal)
 	}
 	return calendars
 }
