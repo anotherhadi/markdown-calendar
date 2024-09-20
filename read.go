@@ -17,7 +17,7 @@ func Read(path string) (Calendar, error) {
 	c.md = &md
 
 	c.Name = md.Title
-	c.EventColor = c.md.GetFrontMatter("event_color", "#A594FD").(string)
+	c.EventColor = c.md.GetFrontMatter("event_color", "").(string)
 
 	// Load events
 	for _, section := range md.Sections {
@@ -85,7 +85,8 @@ func Read(path string) (Calendar, error) {
 func (c *Calendar) GetEventsByDate(year, month, day int) []Event {
 	var events []Event
 	for _, event := range c.Events {
-		if event.StartDate.Year == year && event.StartDate.Month == month && event.StartDate.Day == day {
+		if event.StartDate.Year == year && event.StartDate.Month == month &&
+			event.StartDate.Day == day {
 			events = append(events, event)
 		}
 	}

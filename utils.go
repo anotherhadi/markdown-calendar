@@ -82,3 +82,65 @@ func IncrementDay(day, month, year *int, inc int) {
 		*day = tmp
 	}
 }
+
+func (d Date) IsBefore(date Date) bool {
+	if d.Year < date.Year {
+		return true
+	}
+	if d.Month < date.Month {
+		return true
+	}
+	if d.Day < date.Day {
+		return true
+	}
+	if d.Hour < date.Hour {
+		return true
+	}
+	if d.Minute < date.Minute {
+		return true
+	}
+	return false
+}
+
+func (d Date) IsAfter(date Date) bool {
+	return !d.IsBefore(date) &&
+		(d.Day != date.Day || d.Month != date.Month || d.Year != date.Year || d.Hour != date.Hour || d.Minute != date.Minute)
+}
+
+func (e Event) IsPast() bool {
+	day, month, year := Today()
+	hour, minute := time.Now().Hour(), time.Now().Minute()
+	today := Date{Day: day, Month: month, Year: year, Hour: hour, Minute: minute}
+	// if e.EndDate is not set, take e.StartDate
+	if e.EndDate == (Date{}) {
+		return e.StartDate.IsBefore(today)
+	} else {
+		return e.EndDate.IsBefore(today)
+	}
+}
+
+func MergeCalendars(calendars []Calendar) Calendar {
+	merged := Calendar{}
+	for _, cal := range calendars {
+		for _, event := range cal.Events {
+			event.CalendarName = cal.Name
+			merged.Events = append(merged.Events, event)
+		}
+	}
+	return merged
+}
+
+func GetCalendarsNames(calendars []Calendar) []string {
+	names := make([]string, len(calendars))
+	for i, cal := range calendars {
+		names[i] = cal.Name
+	}
+	return names
+}
+
+func (c Calendar) GetColor(defaultColor string) string {
+	if c.EventColor != "" {
+		return c.EventColor
+	}
+	return defaultColor
+}
