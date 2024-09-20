@@ -1,6 +1,11 @@
 package calendar
 
-import "time"
+import (
+	"errors"
+	"time"
+
+	purple "github.com/anotherhadi/purple-apps"
+)
 
 // DaysInMonth returns the number of days in the given month and year
 func DaysInMonth(month, year int) int {
@@ -143,4 +148,25 @@ func (c Calendar) GetColor(defaultColor string) string {
 		return c.EventColor
 	}
 	return defaultColor
+}
+
+func GetCalendarByName(calendars []Calendar, name string) (Calendar, error) {
+	for _, cal := range calendars {
+		if cal.Name == name {
+			return cal, nil
+		}
+	}
+	return Calendar{}, errors.New("Calendar not found")
+}
+
+func GetPurpleCalendars() []Calendar {
+	calendars := []Calendar{}
+	for _, p := range purple.Config.Calendar.Paths {
+		cal, err := Read(p)
+		if err != nil {
+			continue
+		}
+		calendars = append(calendars, cal)
+	}
+	return calendars
 }
