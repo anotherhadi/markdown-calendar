@@ -170,3 +170,25 @@ func GetPurpleCalendars() []*Calendar {
 	}
 	return calendars
 }
+
+func RemovePastEvents(events []Event) []Event {
+	var newEvents []Event
+	for _, e := range events {
+		if !e.IsPast() {
+			newEvents = append(newEvents, e)
+		}
+	}
+	return newEvents
+}
+
+func SortEventsByStartDate(events []Event) []Event {
+	// Bubble sort
+	for i := 0; i < len(events); i++ {
+		for j := 0; j < len(events)-1; j++ {
+			if events[j].StartDate.IsAfter(events[j+1].StartDate) {
+				events[j], events[j+1] = events[j+1], events[j]
+			}
+		}
+	}
+	return events
+}
